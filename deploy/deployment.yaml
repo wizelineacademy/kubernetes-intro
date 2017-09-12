@@ -1,0 +1,47 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: protobuf-demo
+  name: protobuf-demo
+  namespace: default
+spec:
+  minReadySeconds: 5
+  replicas: 1
+  selector:
+    matchLabels:
+      run: protobuf-demo
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: protobuf-demo
+    spec:
+      containers:
+      - env:
+        - name: DEPLOY_IN_KUBE
+          value: "NO"
+        - name: REDEPLOY
+          value: "NO"
+        - name: NEW_RELIC_APP_NAME
+          value: protobuf-demo
+        - name: NEW_RELIC_LICENSE_KEY
+          valueFrom:
+            secretKeyRef:
+              key: key1
+              name: newrelic-token
+        image: wizelineacademy/protobuf-demo:v0.0.9a
+        imagePullPolicy: Always
+        name: protobuf-demo
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
