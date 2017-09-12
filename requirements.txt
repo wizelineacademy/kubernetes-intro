@@ -1,0 +1,16 @@
+barnum
+Flask
+flask-compress
+jsonschema
+Jinja2
+MarkupSafe
+Werkzeug
+itsdangerous
+mox
+newrelic
+protobuf
+python-dateutil
+python-gflags
+pytz
+six
+uwsgi

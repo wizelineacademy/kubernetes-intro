@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+message AddressBook {
+  repeated Contact contacts = 1;
+};
+
+message Address {
+  repeated string address_lines = 1;
+  string postcode = 2;
+};
+
+message Contact {
+  string first_name = 1;
+  string last_name = 2;
+  Address address = 3;
+  repeated Phone phone_numbers = 4;
+};
+
+enum PhoneType {
+  SIP = 0;
+  MOBILE = 1;
+  LANDLINE = 2;
+}
+
+message Phone {
+  PhoneType type = 1;
+  string number = 2;
+};
+
+message SearchResult {
+  repeated Contact contacts = 1;
+};
